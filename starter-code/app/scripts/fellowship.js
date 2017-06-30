@@ -18,7 +18,18 @@ var buddies = [
 
 var lands = ['The Shire', 'Rivendell', 'Mordor'];
 var body = document.querySelector('body');
+
+//***********Location***************//
 var whereAmI = document.getElementById('middle-earth');
+var theShire = document.getElementById('theShire');
+
+
+//**************CAST LISTS*************//
+var squad = document.getElementById('demHobbits');
+
+
+
+
 
 // Part 1
 
@@ -49,19 +60,19 @@ makeMiddleEarth();
 
 function makeHobbits() {
   // display an unordered list of hobbits in the shire (which is the first article tag on the page)
+  var demHobbits = document.createElement('ul');
   var theresTheShire = document.querySelector("article");
   theresTheShire.setAttribute('id', 'theShire');
-  var demHobbits = document.createElement('ul');
   demHobbits.setAttribute('id', 'demHobbits');
-    for(var i = 0; i < hobbits.length; i++){
-      var whodaHobbit = document.createElement('li');
-      whodaHobbit.setAttribute('data-id', i);
+  for(var i = 0; i < hobbits.length; i++){
+    var whodaHobbit = document.createElement('li');
+    whodaHobbit.setAttribute('data-id', i);
   // give each hobbit a class of hobbit
-      whodaHobbit.className = "hobbit";
-      whodaHobbit.innerHTML = hobbits[i];
-      demHobbits.appendChild(whodaHobbit);
-    }
-    theresTheShire.appendChild(demHobbits);
+    whodaHobbit.className = "hobbit";
+    whodaHobbit.innerHTML = hobbits[i];
+    demHobbits.appendChild(whodaHobbit);
+  }
+  theresTheShire.appendChild(demHobbits);
 }
 makeHobbits();
 
@@ -99,7 +110,6 @@ function makeBuddies() {
   }
   theFellowship.appendChild(myBros);
   // insert your aside as a child element of rivendell
-  var whereAmI = document.querySelector('#middle-earth');
   var showMeRivendell = whereAmI.firstChild.nextSibling;
   showMeRivendell.setAttribute('id', 'showMeRivendell');
   showMeRivendell.appendChild(theFellowship);
@@ -135,11 +145,26 @@ leaveTheShire();
 
 function forgeTheFellowShip() {
   // create a new div called 'the-fellowship' within rivendell
+  var the_fellowship = document.createElement('div');
+  the_fellowship.setAttribute('id', 'the_fellowship');
+  var myParty = document.createElement('ul');
+  var withinRivendell = whereAmI.firstChild.nextSibling;
+  withinRivendell.appendChild(the_fellowship);
+  the_fellowship.appendChild(myParty); 
+
   // add each hobbit and buddy one at a time to 'the-fellowship'
+  for(var i = 0; i < squad.length; i++){
+    var allie = document.createElement('li');
+    allie.setAttribute('data-id', i);
+    allie.innerHTML = squad[i];
+    myParty.appendChild(allie);
+    alert( allie + " has joined your party!");
+  }
+
   // after each character is added make an alert that they have joined your party
 }
 
-
+forgeTheFellowShip();
 // Part 8
 
 
