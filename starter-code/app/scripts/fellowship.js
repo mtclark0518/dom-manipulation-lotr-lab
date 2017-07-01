@@ -20,6 +20,7 @@ var lands = ['The Shire', 'Rivendell', 'Mordor'];
 var middleEarth;
 var theShire;
 var hobbitSquad;
+var Gandalf;
 var Frodo;
 var theOneRing;
 
@@ -153,32 +154,34 @@ function forgeTheFellowShip() {
   for(var j = 0; j < demHobbits.length; j++){
     var cloneDemHobbits = demHobbits[j].cloneNode(true);
     theFellowship.appendChild(cloneDemHobbits);
-    alert(demHobbits[j].innerText + " has joined the fellowship");
+   // alert(demHobbits[j].innerText + " has joined the fellowship");
   }
   // add each buddy 
   for(var i = 0; i < whoseInMyCrew.length; i++){
     var cloneCrew = whoseInMyCrew[i].cloneNode(true);
     theFellowship.appendChild(cloneCrew);
-    alert(whoseInMyCrew[i].innerText + " has joined the fellowship");
+    //alert(whoseInMyCrew[i].innerText + " has joined the fellowship");
   }
   Rivendell.removeChild(hobbitSquad);
   Rivendell.firstChild.nextSibling.removeChild(crew);
-  console.log(Rivendell.innerHTML);
 }
 forgeTheFellowShip();
 var theFellowshipOfTheRing = theFellowship.getElementsByTagName('li');
 
 // Part 8
 function theBalrog() {
-// change the 'Gandalf' textNode to 'Gandalf the White'
 for(var i = 0; i < theFellowshipOfTheRing.length; i++){
-    if(theFellowshipOfTheRing[i].innerText.contains('Gandalf')){
-        theFellowshipOfTheRing[i].innerText = 'Gandalf the White';
-
-      }
-  // apply style to the element
-  // make the background 'white', add a grey border
+    theFellowshipOfTheRing[i].setAttribute('data-id', i);
+// change the 'Gandalf' textNode to 'Gandalf the White'        
+    if(theFellowshipOfTheRing[i].innerHTML === 'Gandalf the Grey'){
+        var Gandalf = theFellowshipOfTheRing[i];
+        Gandalf.innerHTML = 'Gandalf the White';
+// apply style to the element
+// make the background 'white', add a grey border
+        Gandalf.style.background = 'white';
+        Gandalf.style.border = '4px solid grey';
     }
+  }
 }
 theBalrog();
 
