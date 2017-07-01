@@ -17,163 +17,170 @@ var buddies = [
 ];
 
 var lands = ['The Shire', 'Rivendell', 'Mordor'];
-var body = document.querySelector('body');
-
-//***********Location***************//
-var whereAmI = document.getElementById('middle-earth');
-var theShire = document.getElementById('theShire');
-
-
-//**************CAST LISTS*************//
-var squad = document.getElementById('demHobbits');
-
+var middleEarth;
+var theShire;
+var hobbitSquad;
+var Frodo;
+var theOneRing;
 
 
 
 
 // Part 1
-
+var middleEarth = document.createElement('section');
+middleEarth.setAttribute('id', 'middle-earth');
 
 function makeMiddleEarth() {
-  // create a section tag with an id of middle-earth
-  var middle_earth = document.createElement("section");
-  middle_earth.setAttribute("id", "middle-earth");
-  
+  // create a section tag with an id of middleEarth
+  //var middleEarth = document.createElement('section');  
   // inside, add each land as an article tag
-  for(var i = 0; i < lands.length; i++){
-    var land_article = document.createElement("article");
-    land_article.setAttribute('data-id', i);
-
+  for (var i = 0; i < lands.length; i++) {
+    var territories = document.createElement('article');
+    territories.setAttribute('data-id', i);
+    middleEarth.appendChild(territories);
   // inside each article tag include an h1 with the name of the land
-    var land_header = document.createElement("h1");
-    land_header.innerHTML = lands[i];
-    land_article.appendChild(land_header);
-    middle_earth.appendChild(land_article);
-  // append middle-earth to your document body
+    var repYoCity = document.createElement('h1');
+    repYoCity.innerHTML = lands[i];
+    territories.appendChild(repYoCity);
   }
-  body.append(middle_earth);
+    // append middle-earth to your document body
+  document.body.appendChild(middleEarth);
 }
 makeMiddleEarth();
 
+//var middleEarth = document.getElementById('middleEarth');
+
+
 
 // Part 2
+var theShire = document.querySelector('article');
+theShire.setAttribute('id', 'theShire');
+var hobbitSquad = document.createElement('ul');
+hobbitSquad.setAttribute('id', 'hobbitSquad');
 
 function makeHobbits() {
-  // display an unordered list of hobbits in the shire (which is the first article tag on the page)
-  var demHobbits = document.createElement('ul');
-  var theresTheShire = document.querySelector("article");
-  theresTheShire.setAttribute('id', 'theShire');
-  demHobbits.setAttribute('id', 'demHobbits');
-  for(var i = 0; i < hobbits.length; i++){
-    var whodaHobbit = document.createElement('li');
-    whodaHobbit.setAttribute('data-id', i);
-  // give each hobbit a class of hobbit
-    whodaHobbit.className = "hobbit";
-    whodaHobbit.innerHTML = hobbits[i];
-    demHobbits.appendChild(whodaHobbit);
+// display an unordered list of hobbits in the shire (which is the first article tag on the page)
+for(var i = 0; i < hobbits.length; i++){
+  var imaHobbit = document.createElement('li');
+  imaHobbit.setAttribute('data-id', i);
+// give each hobbit a class of hobbit
+  imaHobbit.classList.add('hobbit');
+  imaHobbit.innerHTML = hobbits[i];
+  hobbitSquad.appendChild(imaHobbit);
   }
-  theresTheShire.appendChild(demHobbits);
+  theShire.appendChild(hobbitSquad);
 }
 makeHobbits();
 
+//var theShire = document.getElementById(theShire);
+//var hobbitSquad = document.getElementById(hobbitSquad);
+
 // Part 3
+// create a div with an id of 'the-ring'
+var theOneRing = document.createElement('div');
+theOneRing.setAttribute('id', 'the-ring');
+var Frodo = document.querySelector('li.hobbit');
 
 function keepItSecretKeepItSafe() {
-  // create a div with an id of 'the-ring'
-  var ringDIV = document.createElement('div');
-  ringDIV.setAttribute('id', 'the-ring'); 
   // give the div a class of 'magic-imbued-jewelry'
-  ringDIV.className = 'magic-imbued-jewelry';
+  theOneRing.classList.add('magic-imbued-jewelry');
   // add an event listener so that when a user clicks on the ring, the nazgulScreech function (provided) is invoked
-  ringDIV.addEventListener('click', nazgulScreech);
+  theOneRing.addEventListener('click', nazgulScreech);
   // add the ring as a child of Frodo
-  var Frodo = document.querySelector('li');
-  Frodo.appendChild(ringDIV);
+  Frodo.appendChild(theOneRing);
 }
 keepItSecretKeepItSafe();
 
 
 // Part 4
-
+var crew = document.createElement('ul');
+var Rivendell = middleEarth.firstChild.nextSibling;
 
 function makeBuddies() {
   // create an aside tag
-  var theFellowship = document.createElement('aside');
+  var asideTag = document.createElement('aside');
   // attach an unordered list of the 'buddies' in the aside
-  var myBros = document.createElement('ul');
-  myBros.setAttribute('id', 'myBros');
-  for (var i = 0; i < buddies.length; i++){
-    var myBud = document.createElement('li');
-    myBud.setAttribute('data-id', i);
-    myBud.innerHTML = buddies[i];
-    myBros.appendChild(myBud);
-  }
-  theFellowship.appendChild(myBros);
+  asideTag.appendChild(crew);
   // insert your aside as a child element of rivendell
-  var showMeRivendell = whereAmI.firstChild.nextSibling;
-  showMeRivendell.setAttribute('id', 'showMeRivendell');
-  showMeRivendell.appendChild(theFellowship);
+  Rivendell.appendChild(asideTag);
+  for(var i = 0; i < buddies.length; i++){
+    var bro = document.createElement('li');
+    bro.setAttribute('data-id', i);
+    bro.innerHTML = buddies[i];
+    crew.appendChild(bro);
+  }
 }
 makeBuddies();
 
-// Part 5
 
+// Part 5
+var whoseInMyCrew = crew.getElementsByTagName('li');
+var Aragorn = document.createElement('li');
+Aragorn.innerHTML = "Aragorn";
 
 function beautifulStranger() {
   // change the 'Strider' textnode to 'Aragorn'
-  var futureKing = document.querySelector('aside ul').lastChild.previousSibling;
-  futureKing.innerHTML = 'Aragorn';
+  for(var i = 0; i < whoseInMyCrew.length; i++){
+      if(whoseInMyCrew[i].innerHTML === 'Strider') {
+        crew.replaceChild(Aragorn, whoseInMyCrew[i]); 
+      }
+    }
   }
 beautifulStranger();
 
-// Part 6
 
-function leaveTheShire() {
-  // assemble the hobbits
-  var theShire = document.getElementById('theShire');
-  var squad = document.getElementById('demHobbits');
+// Part 6
+function leaveTheShire() {  
+  theShire.removeChild(hobbitSquad); //gather the hobbits
   //remove from theShire
-  var hitTheRoad = theShire.removeChild(squad);
   //move them to Rivendell
-  var journeyToRivendell = document.getElementById('showMeRivendell').firstChild.nextSibling;
-  journeyToRivendell.appendChild(squad);
+  Rivendell.appendChild(hobbitSquad);
   }
 leaveTheShire();
 
+
 // Part 7
-
-
+var theFellowship = document.createElement('ul');
+var demHobbits  = hobbitSquad.getElementsByTagName('li');
 function forgeTheFellowShip() {
   // create a new div called 'the-fellowship' within rivendell
   var the_fellowship = document.createElement('div');
-  the_fellowship.setAttribute('id', 'the_fellowship');
-  var myParty = document.createElement('ul');
-  var withinRivendell = whereAmI.firstChild.nextSibling;
-  withinRivendell.appendChild(the_fellowship);
-  the_fellowship.appendChild(myParty); 
+  the_fellowship.setAttribute('id', 'the-fellowship');
+  the_fellowship.appendChild(theFellowship);
+  Rivendell.appendChild(the_fellowship);
 
-  // add each hobbit and buddy one at a time to 'the-fellowship'
-  for(var i = 0; i < squad.length; i++){
-    var allie = document.createElement('li');
-    allie.setAttribute('data-id', i);
-    allie.innerHTML = squad[i];
-    myParty.appendChild(allie);
-    alert( allie + " has joined your party!");
+  //add each hobbit
+  for(var j = 0; j < demHobbits.length; j++){
+    var cloneDemHobbits = demHobbits[j].cloneNode(true);
+    theFellowship.appendChild(cloneDemHobbits);
+    alert(demHobbits[j].innerText + " has joined the fellowship");
   }
-
-  // after each character is added make an alert that they have joined your party
+  // add each buddy 
+  for(var i = 0; i < whoseInMyCrew.length; i++){
+    var cloneCrew = whoseInMyCrew[i].cloneNode(true);
+    theFellowship.appendChild(cloneCrew);
+    alert(whoseInMyCrew[i].innerText + " has joined the fellowship");
+  }
+  Rivendell.removeChild(hobbitSquad);
+  Rivendell.firstChild.nextSibling.removeChild(crew);
+  console.log(Rivendell.innerHTML);
 }
-
 forgeTheFellowShip();
+var theFellowshipOfTheRing = theFellowship.getElementsByTagName('li');
+
 // Part 8
-
-
 function theBalrog() {
-  // change the 'Gandalf' textNode to 'Gandalf the White'
+// change the 'Gandalf' textNode to 'Gandalf the White'
+for(var i = 0; i < theFellowshipOfTheRing.length; i++){
+    if(theFellowshipOfTheRing[i].innerText.contains('Gandalf')){
+        theFellowshipOfTheRing[i].innerText = 'Gandalf the White';
+
+      }
   // apply style to the element
   // make the background 'white', add a grey border
+    }
 }
-
+theBalrog();
 
 // Part 9
 
